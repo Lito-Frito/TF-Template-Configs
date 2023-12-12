@@ -29,3 +29,8 @@ variable "availability_zone" {
     description = "value of the availability zone for the development subnet"
     type = string
 }
+
+variable "env_prefix" {
+    description = "value of the environment taht is prefixed for respective infrastructure"
+    type = string
+  
