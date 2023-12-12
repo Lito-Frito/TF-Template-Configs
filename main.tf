@@ -17,7 +17,7 @@ provider "aws" {
 resource "aws_vpc" "myapp-vpc" {
   cidr_block = var.myapp_vpc_cidr
   tags = {
-    Name: "${var.env_prefix}-some_app_vpc__"
+    Name: "${var.env_prefix}-__some_app_vpc__"
   }
 }
 
@@ -26,7 +26,7 @@ resource "aws_subnet" "myapp-subnet" {
   cidr_block = var.myapp_subnet_cidr
   availability_zone = var.availability_zone
   tags = {
-    Name: "${var.env_prefix}-some_app_subnet__"
+    Name: "${var.env_prefix}-__some_app_subnet__"
   }
 }
 
