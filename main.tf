@@ -1,32 +1,50 @@
 terraform {
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "5.30.0"
     }
   }
 }
 
 provider "aws" {
-    # Configuration options
-    region = var.region
-    access_key = var.access_key
-    secret_key = var.secret_key
+  # Configuration options
+  region     = var.region
+  access_key = var.access_key
+  secret_key = var.secret_key
 }
 
 resource "aws_vpc" "myapp-vpc" {
   cidr_block = var.myapp_vpc_cidr
   tags = {
-    Name: "${var.env_prefix}-__some_app_-vpc"
+    Name : "${var.env_prefix}-__some_app_-vpc"
   }
 }
 
 resource "aws_subnet" "myapp-subnet" {
-  vpc_id = aws_vpc.myapp-vpc.id
-  cidr_block = var.myapp_subnet_cidr
+  vpc_id            = aws_vpc.myapp-vpc.id
+  cidr_block        = var.myapp_subnet_cidr
   availability_zone = var.availability_zone
   tags = {
-    Name: "${var.env_prefix}-__some_app__-subnet"
+    Name : "${var.env_prefix}-__some_app__-subnet"
   }
 }
 
+resource "aws_route_table" "myapp-route-table" {
+  vpc_id = aws_vpc.myapp-vpc.id
+
+  route {
+    cidr_block = var.route_table_cidr_block
+    gateway_id = aws_internet_gateway.myapp-internet-gateway.id
+  }
+  tags = {
+    Name : "${var.env_prefix}-__some_app__-route_table"
+  }
+}
+
+resource "aws_internet_gateway" "myapp-internet-gateway" {
+  vpc_id = aws_vpc.myapp-vpc.id
+  tags = {
+    Name : "${var.env_prefix}-__some_app__-internet_gateway"
+  }
+}
