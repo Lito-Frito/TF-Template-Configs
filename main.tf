@@ -14,19 +14,19 @@ provider "aws" {
     secret_key = var.secret_key
 }
 
-resource "aws_vpc" "dev-vpc" {
-  cidr_block = var.dev_vpc_cidr
+resource "aws_vpc" "myapp-vpc" {
+  cidr_block = var.myapp_vpc_cidr
   tags = {
-    Name: "develonment"
+    Name: "__some_app_vpc__"
   }
 }
 
-resource "aws_subnet" "dev-subnet" {
-  vpc_id = aws_vpc.dev-vpc.id
-  cidr_block = var.dev_subnet_cidr
+resource "aws_subnet" "myapp-subnet" {
+  vpc_id = aws_vpc.myapp-vpc.id
+  cidr_block = var.myapp_subnet_cidr
   availability_zone = var.availability_zone
   tags = {
-    Name: "develonment"
+    Name: "__some_app_subnet__"
   }
 }
 
