@@ -1,6 +1,7 @@
 variable "region" {
   description = "value of the region infra is provisoned in"
   type = string
+  default = "us-east-1"
 }
 
 variable "access_key" {
