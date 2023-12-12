@@ -17,7 +17,7 @@ provider "aws" {
 resource "aws_vpc" "myapp-vpc" {
   cidr_block = var.myapp_vpc_cidr
   tags = {
-    Name : "${var.env_prefix}-__some_app_-vpc"
+    Name : "${var.env_prefix}-__some_app__-vpc"
   }
 }
 
@@ -47,4 +47,9 @@ resource "aws_internet_gateway" "myapp-internet-gateway" {
   tags = {
     Name : "${var.env_prefix}-__some_app__-internet_gateway"
   }
+}
+
+resource "aws_route_table_association" "myapp-route-table-association" {
+  subnet_id      = aws_subnet.myapp-subnet.id
+  route_table_id = aws_route_table.myapp-route-table.id
 }
