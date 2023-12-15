@@ -48,3 +48,35 @@ resource "aws_default_route_table" "myapp-default-route-table" {
     Name : "${var.env_prefix}-${var.__some_app__}-main_route_table"
   }
 }
+
+resource "aws_security_group" "myapp_sg" {
+  name   = "${var.env_prefix}-${var.__some_app__}-sg"
+  vpc_id = aws_vpc.myapp-vpc.id
+
+  ingress {
+    description = "Allow SSH to VPC"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = [var.ssh_cidr_block]
+  }
+  ingress = {
+    description = "Allow HTTP to VPC"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = [var.route_table_cidr_block]
+  }
+
+  egress = {
+    description = "Allow all outbound traffic"
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name : "${var.env_prefix}-${var.__some_app__}-sg"
+  }
+}
