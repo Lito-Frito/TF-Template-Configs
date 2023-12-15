@@ -17,7 +17,7 @@ provider "aws" {
 resource "aws_vpc" "myapp-vpc" {
   cidr_block = var.myapp_vpc_cidr
   tags = {
-    Name : "${var.env_prefix}-__some_app__-vpc"
+    Name : "${var.env_prefix}-${var.__some_app__}-vpc"
   }
 }
 
@@ -26,32 +26,14 @@ resource "aws_subnet" "myapp-subnet" {
   cidr_block        = var.myapp_subnet_cidr
   availability_zone = var.availability_zone
   tags = {
-    Name : "${var.env_prefix}-__some_app__-subnet"
+    Name : "${var.env_prefix}-${var.__some_app__}-subnet"
   }
 }
-
-# resource "aws_route_table" "myapp-route-table" {
-#   vpc_id = aws_vpc.myapp-vpc.id
-
-#   route {
-#     cidr_block = var.route_table_cidr_block
-#     gateway_id = aws_internet_gateway.myapp-internet-gateway.id
-#   }
-#   tags = {
-#     Name : "${var.env_prefix}-__some_app__-route_table"
-#   }
-# }
-
-
-# resource "aws_route_table_association" "myapp-route-table-association" {
-#   subnet_id      = aws_subnet.myapp-subnet.id
-#   route_table_id = aws_route_table.myapp-route-table.id
-# }
 
 resource "aws_internet_gateway" "myapp-internet-gateway" {
   vpc_id = aws_vpc.myapp-vpc.id
   tags = {
-    Name : "${var.env_prefix}-__some_app__-internet_gateway"
+    Name : "${var.env_prefix}-${var.__some_app__}-internet_gateway"
   }
 }
 
@@ -63,6 +45,6 @@ resource "aws_default_route_table" "myapp-default-route-table" {
     gateway_id = aws_internet_gateway.myapp-internet-gateway.id
   }
   tags = {
-    Name : "${var.env_prefix}-__some_app__-main_route_table"
+    Name : "${var.env_prefix}-${var.__some_app__}-main_route_table"
   }
 }

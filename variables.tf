@@ -14,6 +14,12 @@ variable "secret_key" {
   type        = string
 }
 
+variable "__some_app__" {
+  description = "placeholder for the app name"
+  type        = string
+  default = "__some_app__"
+}
+
 variable "myapp_vpc_cidr" {
   description = "value of the development vpc cidr block"
   default     = "10.0.0.0/16"
