@@ -53,28 +53,8 @@ resource "aws_security_group" "myapp_sg" {
   name   = "${var.env_prefix}-${var.__some_app__}-sg"
   vpc_id = aws_vpc.myapp-vpc.id
 
-  ingress {
-    description = "Allow SSH to VPC"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = [var.ssh_cidr_block]
-  }
-  ingress = {
-    description = "Allow HTTP to VPC"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = [var.route_table_cidr_block]
-  }
-
-  egress = {
-    description = "Allow all outbound traffic"
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  ingress = [var.ingress_list_of_ssh_fields, var.ingress_list_of_http_fields]
+  egress  = [var.egress_list_of_fields]
 
   tags = {
     Name : "${var.env_prefix}-${var.__some_app__}-sg"
