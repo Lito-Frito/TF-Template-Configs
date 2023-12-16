@@ -49,8 +49,7 @@ resource "aws_default_route_table" "myapp-default-route-table" {
   }
 }
 
-resource "aws_security_group" "myapp_sg" {
-  name   = "${var.env_prefix}-${var.__some_app__}-sg"
+resource "aws_default_security_group" "myapp_sg" {
   vpc_id = aws_vpc.myapp-vpc.id
 
   ingress = [var.ingress_list_of_ssh_fields, var.ingress_list_of_http_fields]
