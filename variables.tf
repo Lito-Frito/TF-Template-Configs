@@ -153,3 +153,8 @@ variable "key_name" {
   description = "value of the key name"
   type        = string
 }
+
+variable "public_key" {
+  description = "value of the public key"
+  type        = string
+}

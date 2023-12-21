@@ -73,7 +73,7 @@ data "aws_ami" "latest-amazon-image" {
 resource "aws_instance" "myapp-server" {
   ami                    = data.aws_ami.latest-amazon-image.id
   instance_type          = var.instance_type
-  key_name               = var.key_name
+  key_name               = aws_key_pair.myapp-key-pair.key_name
   subnet_id              = aws_subnet.myapp-subnet.id
   vpc_security_group_ids = [aws_default_security_group.myapp-sg.id]
   availability_zone      = var.availability_zone
@@ -82,4 +82,9 @@ resource "aws_instance" "myapp-server" {
   tags = {
     Name : "${var.env_prefix}-${var.__some_app__}-server"
   }
+}
+
+resource "aws_key_pair" "myapp-key-pair" {
+  key_name   = var.key_name
+  public_key = var.public_key
 }
