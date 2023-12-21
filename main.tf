@@ -49,7 +49,7 @@ resource "aws_default_route_table" "myapp-default-route-table" {
   }
 }
 
-resource "aws_default_security_group" "myapp_sg" {
+resource "aws_default_security_group" "myapp-sg" {
   vpc_id = aws_vpc.myapp-vpc.id
 
   ingress = [var.ingress_list_of_ssh_fields, var.ingress_list_of_http_fields]
@@ -59,3 +59,24 @@ resource "aws_default_security_group" "myapp_sg" {
     Name : "${var.env_prefix}-${var.__some_app__}-sg"
   }
 }
+
+data "aws_ami" "latest-amazon-image" {
+  most_recent = true
+  owners      = [var.ami_owner]
+
+  filter {
+    name   = "name"
+    values = [var.aws_ami_name_filter]
+  }
+}
+
+# resource "aws_instance" "myapp-server" {
+#   ami           = data.aws_ami.latest-amazon-image.id
+#   instance_type = var.instance_type
+#   key_name      = var.key_name
+#   subnet_id     = aws_subnet.myapp-subnet.id
+#   vpc_security_group_ids = [aws_default_security_group.myapp-sg.id]
+#   tags = {
+#     Name : "${var.env_prefix}-${var.__some_app__}-server"
+#   }
+# }

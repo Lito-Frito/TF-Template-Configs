@@ -127,3 +127,19 @@ variable "egress_list_of_fields" {
     self             = false
   }
 }
+
+# variable "ami" {
+#   description = "value of the ami to be used for the instance (default is Amazon Linux 2023 AMI)"
+#   type = string
+#   default = "ami-079db87dc4c10ac91"
+# }
+
+variable "ami_owner" {
+  description = "value of the ami owner"
+  type        = string
+}
+
+variable "aws_ami_name_filter" {
+  description = "value of the ami name filter"
+  type        = string
+}
