@@ -70,13 +70,16 @@ data "aws_ami" "latest-amazon-image" {
   }
 }
 
-# resource "aws_instance" "myapp-server" {
-#   ami           = data.aws_ami.latest-amazon-image.id
-#   instance_type = var.instance_type
-#   key_name      = var.key_name
-#   subnet_id     = aws_subnet.myapp-subnet.id
-#   vpc_security_group_ids = [aws_default_security_group.myapp-sg.id]
-#   tags = {
-#     Name : "${var.env_prefix}-${var.__some_app__}-server"
-#   }
-# }
+resource "aws_instance" "myapp-server" {
+  ami                    = data.aws_ami.latest-amazon-image.id
+  instance_type          = var.instance_type
+  key_name               = var.key_name
+  subnet_id              = aws_subnet.myapp-subnet.id
+  vpc_security_group_ids = [aws_default_security_group.myapp-sg.id]
+  availability_zone      = var.availability_zone
+
+  associate_public_ip_address = true
+  tags = {
+    Name : "${var.env_prefix}-${var.__some_app__}-server"
+  }
+}

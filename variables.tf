@@ -41,7 +41,7 @@ variable "availability_zone" {
 variable "env_prefix" {
   description = "value of the environment taht is prefixed for respective infrastructure"
   type        = string
-  default     = "devlopment"
+  default     = "development"
 }
 
 variable "route_table_cidr_block" {
@@ -141,5 +141,15 @@ variable "ami_owner" {
 
 variable "aws_ami_name_filter" {
   description = "value of the ami name filter"
+  type        = string
+}
+
+variable "instance_type" {
+  description = "value of the instance type"
+  type        = string
+}
+
+variable "key_name" {
+  description = "value of the key name"
   type        = string
 }
