@@ -86,5 +86,5 @@ resource "aws_instance" "myapp-server" {
 
 resource "aws_key_pair" "myapp-key-pair" {
   key_name   = var.key_name
-  public_key = var.public_key
+  public_key = file(var.public_key_location)
 }

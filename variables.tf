@@ -15,7 +15,7 @@ variable "secret_key" {
 }
 
 variable "__some_app__" {
-  description = "placeholder for the app name"
+  description = "placeholder for the app name (e.g. web server or pihole)"
   type        = string
   default     = "__some_app__"
 }
@@ -39,7 +39,7 @@ variable "availability_zone" {
 }
 
 variable "env_prefix" {
-  description = "value of the environment taht is prefixed for respective infrastructure"
+  description = "value of the environment that is prefixed for respective infrastructure"
   type        = string
   default     = "development"
 }
@@ -154,7 +154,7 @@ variable "key_name" {
   type        = string
 }
 
-variable "public_key" {
+variable "public_key_location" {
   description = "value of the public key"
   type        = string
 }
