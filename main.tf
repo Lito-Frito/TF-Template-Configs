@@ -60,6 +60,7 @@ resource "aws_default_security_group" "myapp-sg" {
   }
 }
 
+# TODO: create my own image that has docker and other tools installed (e.g. WP or Pihole) to further customize implementation
 data "aws_ami" "latest-amazon-image" {
   most_recent = true
   owners      = [var.ami_owner]
