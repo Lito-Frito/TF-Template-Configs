@@ -79,6 +79,14 @@ resource "aws_instance" "myapp-server" {
   vpc_security_group_ids = [aws_default_security_group.myapp-sg.id]
   availability_zone      = var.availability_zone
 
+  user_data = <<EOF
+                  #!/bin/bash
+                  sudo yum update -y && sudo yum install -y docker
+                  sudo systemctl start docker
+                  sudo usermod -aG docker ec2-user
+                  docker run -p 80:80 --name myapp-server -d nginx
+                EOF
+
   associate_public_ip_address = true
   tags = {
     Name : "${var.env_prefix}-${var.__some_app__}-server"
@@ -88,4 +96,8 @@ resource "aws_instance" "myapp-server" {
 resource "aws_key_pair" "myapp-key-pair" {
   key_name   = var.key_name
   public_key = file(var.public_key_location)
+}
+
+output "public_IP" {
+  value = aws_instance.myapp-server.public_ip
 }
