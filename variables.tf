@@ -158,3 +158,9 @@ variable "public_key_location" {
   description = "value of the public key"
   type        = string
 }
+
+variable "entrypoint_script_location" {
+  description = "value of the entrypoint script location"
+  type        = string
+  default     = "./entrypoint.sh"
+}
