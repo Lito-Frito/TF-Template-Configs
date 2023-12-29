@@ -87,6 +87,8 @@ resource "aws_instance" "myapp-server" {
                   docker run -p 80:80 --name myapp-server -d nginx
                 EOF
 
+  user_data_replace_on_change = true
+
   associate_public_ip_address = true
   tags = {
     Name : "${var.env_prefix}-${var.__some_app__}-server"
