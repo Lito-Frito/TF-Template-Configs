@@ -1,2 +1,7 @@
-access_key="__SOME_TEXT__"
-secret_key=
+access_key="__SOME_TEXT__" # Access key for IAM user on AWS (usually under IAM>Users>__User__)
+secret_key="__SOME_TEXT__" # Secret key for IAM user on AWS (usually under IAM>Users>__User__>Click REVEAL)
+ami_owner="__SOME_TEXT__"
+aws_ami_name_filter="__SOME_TEXT__"
+instance_type="__SOME_TEXT__"
+key_name="__SOME_TEXT__"
+public_key_location="__SOME_TEXT__"
