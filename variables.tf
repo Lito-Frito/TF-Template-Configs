@@ -14,7 +14,7 @@ variable "secret_key" {
   type        = string
 }
 
-variable "__some_app__" {
+variable "__some_app__" { # Will be changed for each project
   description = "placeholder for the app name (e.g. web server or pihole)"
   type        = string
   default     = "__some_app__"
@@ -38,7 +38,7 @@ variable "availability_zone" {
   default     = "us-east-1a"
 }
 
-variable "env_prefix" {
+variable "env_prefix" { # Will be changed for each project
   description = "value of the environment that is prefixed for respective infrastructure"
   type        = string
   default     = "development"
@@ -76,7 +76,7 @@ variable "ingress_list_of_ssh_fields" {
   }
 }
 
-variable "ingress_list_of_http_fields" {
+variable "ingress_list_of_http_fields" { # For web app based projects
   description = "list of values for the http ingress attribute in security group"
   type = object({
     description      = string
